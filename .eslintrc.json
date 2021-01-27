@@ -31,6 +31,7 @@
         "specialLink": ["hrefLeft", "hrefRight"],
         "aspects": ["invalidHref", "preferButton"]
       }
-    ]
+    ],
+    "react/jsx-one-expression-per-line": ["<enabled>", { "allow": "none"|"literal"|"single-child" }]
   }
 }

@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
-const Sidebar = styled.aside`
-  width: 280px;
-  height: 100vh;
+const NomeBackground = styled.div`
+  width: 100px;
+  height: 50px;
   background-color: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   color: white;
-  margin-right: 20px;
 `;
 
-export default Sidebar;
+export default NomeBackground;

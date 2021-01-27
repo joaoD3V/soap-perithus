@@ -37,7 +37,7 @@ export default function Home() {
           );
           if (userIndex >= 0) {
             eventInfo.preventDefault();
-            router.push('/app');
+            router.push(`/app?name=${users[userIndex].name}`);
           } else {
             alert('Usuário inexistente! Por favor crie uma conta');
           }

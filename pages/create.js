@@ -42,7 +42,7 @@ export default function Create() {
           users.push({ name, email, password });
           console.log(users);
           eventInfo.preventDefault();
-          router.push('/app');
+          router.push(`/app?name=${name}`);
         }}
       >
         <InputLogin
