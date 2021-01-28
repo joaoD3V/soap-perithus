@@ -29,8 +29,10 @@ export default function App() {
   const router = useRouter();
   const { id } = router.query;
 
-  const nameIndex = usersDB.users.findIndex(user => user.id === id);
-  const { name } = usersDB.users[nameIndex];
+  const { users } = usersDB;
+  const userIndex = users.findIndex(user => user.id === id);
+  const user = users[userIndex];
+  const { name } = user;
 
   return (
     <>
