@@ -12,12 +12,12 @@ export default function Register() {
   const { users } = usersDB;
   const userIndex = users.findIndex(user => user.id === id);
   const user = users[userIndex];
-  const { name } = user;
+  const nameUser = user.name;
 
   return (
     <>
       <BackgroundApp>
-        <SideBar id={id} name={name} router={router} />
+        <SideBar id={id} name={nameUser} router={router} />
         <RegistroSabonetes router={router} id={id} index={userIndex} />
       </BackgroundApp>
     </>

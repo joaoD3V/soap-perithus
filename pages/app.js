@@ -32,12 +32,12 @@ export default function App() {
   const { users } = usersDB;
   const userIndex = users.findIndex(user => user.id === id);
   const user = users[userIndex];
-  const { name } = user;
+  const nameUser = user.name;
 
   return (
     <>
       <BackgroundApp>
-        <SideBar name={name} router={router} id={id} />
+        <SideBar name={nameUser} router={router} id={id} />
       </BackgroundApp>
     </>
   );
