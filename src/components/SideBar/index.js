@@ -50,7 +50,13 @@ const Menu = styled.button`
   border-radius: 5px;
 `;
 
-export default function Sidebar({ name, router }) {
+const Information = styled.h3`
+  color: white;
+  font-size: 18px;
+  text-align: center;
+`;
+
+export default function Sidebar({ id, router, name }) {
   return (
     <>
       <Aside>
@@ -61,7 +67,7 @@ export default function Sidebar({ name, router }) {
           type="button"
           onClick={eventInfo => {
             eventInfo.preventDefault();
-            router.push(`/app?name=${name}`);
+            router.push(`/app?id=${id}`);
           }}
         >
           Resumo
@@ -70,7 +76,7 @@ export default function Sidebar({ name, router }) {
           type="button"
           onClick={eventInfo => {
             eventInfo.preventDefault();
-            router.push(`/register?name=${name}`);
+            router.push(`/register?id=${id}`);
           }}
         >
           Registrar Sabonetes
@@ -79,26 +85,31 @@ export default function Sidebar({ name, router }) {
           type="button"
           onClick={eventInfo => {
             eventInfo.preventDefault();
-            router.push(`/consult?name=${name}`);
+            router.push(`/consult?id=${id}`);
           }}
         >
           Consultar por Mês e Ano
         </Menu>
-        <Menu
+        {/* <Menu
           type="button"
           onClick={eventInfo => {
             eventInfo.preventDefault();
-            router.push(`/list?name=${name}`);
+            router.push(`/list?id=${id}`);
           }}
         >
           Listar Valores
-        </Menu>
+        </Menu> */}
+        <Information>1 lote = 5 unidades</Information>
+        <Information>1 lote = R$25,00</Information>
+        <Information>1 unidade = R$5,00</Information>
+        <Information>Salário Mínimo = R$ 1.100,00</Information>
       </Aside>
     </>
   );
 }
 
 Sidebar.propTypes = {
-  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   router: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 };

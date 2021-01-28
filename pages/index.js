@@ -37,7 +37,7 @@ export default function Home() {
           );
           if (userIndex >= 0) {
             eventInfo.preventDefault();
-            router.push(`/app?name=${users[userIndex].name}`);
+            router.push(`/app?id=${users[userIndex].id}`);
           } else {
             alert('Usuário inexistente! Por favor crie uma conta');
           }
@@ -64,6 +64,12 @@ export default function Home() {
             onClick={eventInfo => {
               eventInfo.preventDefault();
               router.push('/create');
+            }}
+            onKeyPress={eventInfo => {
+              if (eventInfo.which === 13 || eventInfo.keyCode === 13) {
+                return false;
+              }
+              return true;
             }}
           >
             {' '}

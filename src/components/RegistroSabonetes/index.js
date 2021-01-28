@@ -1,22 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { uuid } from 'uuidv4';
-import soapDB from '../../../soap.json';
-
-const Background = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-`;
-
-const Titulo = styled.h2`
-  font-size: 50px;
-  font-weight: 300;
-  display: flex;
-  justify-content: center;
-`;
+import usersDB from '../../../users.json';
+import BackgroundInformation from '../BackgroundInformation';
+import TituloInformation from '../TituloInformation';
 
 const Registro = styled.div`
   display: flex;
@@ -63,29 +50,31 @@ const AlteraRegistro = styled.button`
   background-color: #000;
   display: flex;
   justify-content: center;
-
-  h2 {
-    color: white;
-    max-width: 80%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
-    font-weight: 200;
-    line-height: 40px;
-  }
+  color: white;
+  max-width: 80%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  font-weight: 200;
+  line-height: 40px;
 `;
 
-export default function RegistroSabonetes({ router }) {
-  const soaps = soapDB.soup;
-  let id;
+export default function RegistroSabonetes({ router, id }) {
+  let idSoap;
   let date;
   let quantity;
+
+  const { users } = usersDB;
+  const userIndex = users.findIndex(user => user.id === id);
+  const user = users[userIndex];
+  const { soaps } = user;
+
   return (
     <>
-      <Background>
-        <Titulo>Registro de Sabonetes</Titulo>
+      <BackgroundInformation>
+        <TituloInformation>Registro de Sabonetes</TituloInformation>
         <Registro>
           <form>
             <div>
@@ -112,10 +101,9 @@ export default function RegistroSabonetes({ router }) {
               type="button"
               onClick={eventInfo => {
                 eventInfo.preventDefault();
-                id = uuid();
-                const soap = { id, date, quantity };
+                idSoap = uuid();
+                const soap = { idSoap, date, quantity };
                 soaps.push(soap);
-                console.log(soaps);
                 const soapIndex = soaps.findIndex(
                   soapItem => soap.id === soapItem.id
                 );
@@ -131,14 +119,20 @@ export default function RegistroSabonetes({ router }) {
             </button>
           </form>
         </Registro>
-        <AlteraRegistro>
-          <h2>Clique aqui para ver os sabonetes registrados</h2>
+        <AlteraRegistro
+          onClick={eventInfo => {
+            eventInfo.preventDefault();
+            router.push(`/soaps?id=${id}`);
+          }}
+        >
+          Clique aqui para ver os sabonetes registrados
         </AlteraRegistro>
-      </Background>
+      </BackgroundInformation>
     </>
   );
 }
 
 RegistroSabonetes.propTypes = {
   router: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
 };

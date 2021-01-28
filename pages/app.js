@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import SideBar from '../src/components/SideBar';
 import BackgroundApp from '../src/components/BackgroundApp';
+import usersDB from '../users.json';
 
 export const DivLucroAtual = styled.div`
   width: 100%;
@@ -26,12 +27,15 @@ export const ResultadoLucroAtual = styled.div`
 
 export default function App() {
   const router = useRouter();
-  const { name } = router.query;
+  const { id } = router.query;
+
+  const nameIndex = usersDB.users.findIndex(user => user.id === id);
+  const { name } = usersDB.users[nameIndex];
 
   return (
     <>
       <BackgroundApp>
-        <SideBar name={name} router={router} />
+        <SideBar name={name} router={router} id={id} />
       </BackgroundApp>
     </>
   );

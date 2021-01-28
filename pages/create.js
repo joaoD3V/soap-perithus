@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { useRouter } from 'next/router';
+import { uuid } from 'uuidv4';
 import Logo from '../src/components/Logo';
 import InputLogin from '../src/components/InputLogin';
 import LoginButton from '../src/components/LoginButton';
@@ -30,7 +31,6 @@ export default function Create() {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-
   return (
     <>
       <Logo>Soap</Logo>
@@ -39,10 +39,10 @@ export default function Create() {
       <FormCreate
         onSubmit={eventInfo => {
           const { users } = usersDB;
-          users.push({ name, email, password });
-          console.log(users);
+          const id = uuid();
+          users.push({ id, name, email, password });
           eventInfo.preventDefault();
-          router.push(`/app?name=${name}`);
+          router.push(`/app?id=${id}`);
         }}
       >
         <InputLogin
@@ -70,6 +70,16 @@ export default function Create() {
           disabled={
             name.length === 0 || email.length === 0 || password.length === 0
           }
+          onClick={eventInfo => {
+            eventInfo.preventDefault();
+            router.push('/');
+          }}
+          onKeyPress={eventInfo => {
+            if (eventInfo.which === 13 || eventInfo.keyCode === 13) {
+              return false;
+            }
+            return true;
+          }}
         >
           Cadastrar
         </LoginButton>

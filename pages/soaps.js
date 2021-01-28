@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import SideBar from '../src/components/SideBar';
 import BackgroundApp from '../src/components/BackgroundApp';
-import RegistroSabonetes from '../src/components/RegistroSabonetes';
 import usersDB from '../users.json';
+import SideBar from '../src/components/SideBar';
+import Sabonetes from '../src/components/Sabonetes';
 
 export default function Register() {
   const router = useRouter();
@@ -17,8 +17,8 @@ export default function Register() {
   return (
     <>
       <BackgroundApp>
-        <SideBar id={id} name={name} router={router} />
-        <RegistroSabonetes router={router} id={id} index={userIndex} />
+        <SideBar name={name} router={router} id={id} index={userIndex} />
+        <Sabonetes id={id} />
       </BackgroundApp>
     </>
   );
