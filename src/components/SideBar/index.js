@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { ptBR } from 'date-fns/locale';
 import { format } from 'date-fns';
 import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
 const Aside = styled.aside`
   width: 280px;
@@ -57,6 +59,21 @@ const Information = styled.h3`
 `;
 
 export default function Sidebar({ id, router, name }) {
+  const [informations, setInformations] = React.useState({
+    compraPorLote: '',
+    quantidaPorLote: '',
+    precoPorLote: '',
+    precoPorUnidade: '',
+    salarioMinimo: '',
+    impostoMarca: '',
+    impostoMei: '',
+  });
+
+  useEffect(() => {
+    axios.get('/api/informations').then(response => {
+      setInformations(response.data);
+    });
+  }, []);
   return (
     <>
       <Aside>
@@ -99,10 +116,11 @@ export default function Sidebar({ id, router, name }) {
         >
           Listar Valores
         </Menu> */}
-        <Information>1 lote = 5 unidades</Information>
-        <Information>1 lote = R$25,00</Information>
-        <Information>1 unidade = R$5,00</Information>
-        <Information>Salário Mínimo = R$ 1.100,00</Information>
+        <Information>{`Compra por lote = ${informations.compraPorLote} reais`}</Information>
+        <Information>{`1 lote = ${informations.quantidaPorLote} unidades`}</Information>
+        <Information>{`1 lote = ${informations.precoPorLote} reais`}</Information>
+        <Information>{`1 unidade = ${informations.precoPorUnidade} reais`}</Information>
+        <Information>{`Salário Mínimo = ${informations.salarioMinimo} reais`}</Information>
         <Menu
           type="button"
           onClick={eventInfo => {

@@ -6,8 +6,37 @@
       "email": "joao.devweb@gmail.com",
       "password": "123456",
       "soaps": [
-
-      ]
+        {
+          "idSoap": "ashdfkjasduyfq8399asdfoiu",
+          "idUser": "adfaskjfa837429asdasdhjgAS",
+          "date": "2021-01-09",
+          "quantity": 5
+        },
+        {
+          "idSoap": "asdklkldflsakdirower342",
+          "idUser": "adfaskjfa837429asdasdhjgAS",
+          "date": "2021-01-19",
+          "quantity": 10
+        },
+        {
+          "idSoap": "asdjfklwioe8u423ajsxa",
+          "idUser": "adfaskjfa837429asdasdhjgAS",
+          "date": "2021-01-29",
+          "quantity": 20
+        },
+        {
+          "idSoap": "asdjfklwioe8u423ajsxa",
+          "idUser": "adfaskjfa837429asdasdhjgAS",
+          "date": "2021-02-02",
+          "quantity": 13
+        },
+        {
+          "idSoap": "asdjfklwioe8u423ajsxasdfa",
+          "idUser": "adfaskjfa837429asdasdhjgAS",
+          "date": "2021-02-02",
+          "quantity": 2
+        }
+     ]
     }
   ]
 }

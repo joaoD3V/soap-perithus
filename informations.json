@@ -1,0 +1,9 @@
+{
+  "compraPorLote": 15,
+  "quantidaPorLote": 5,
+  "precoPorLote": 25,
+  "precoPorUnidade": 5,
+  "salarioMinimo": 1100,
+  "impostoMarca": 18.5,
+  "impostoMei": 6
+}
