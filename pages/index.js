@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import React from 'react';
+import axios from 'axios';
 import Logo from '../src/components/Logo';
 import FormLogin from '../src/components/FormLogin';
 import InputLogin from '../src/components/InputLogin';
 import LoginButton from '../src/components/LoginButton';
-import usersDB from '../users.json';
 
 const CriarConta = styled.h4`
   margin-top: 0;
@@ -26,21 +26,30 @@ export default function Home() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  function handleUserID(event) {
+    event.preventDefault();
+    // eslint-disable-next-line consistent-return
+    axios.get('/api/users').then(response => {
+      const { users } = response.data;
+      const userIndex = users.findIndex(
+        user => user.email === email && user.password === password
+      );
+      if (userIndex >= 0) {
+        const { id } = users[userIndex];
+        router.push(`/app?id=${id}`);
+      } else {
+        alert('Usuário inexistente! Por favor crie uma conta');
+      }
+    });
+  }
+
   return (
     <>
       <Logo>Soap</Logo>
       <FormLogin
         onSubmit={eventInfo => {
-          const { users } = usersDB;
-          const userIndex = users.findIndex(
-            user => user.email === email && user.password === password
-          );
-          if (userIndex >= 0) {
-            eventInfo.preventDefault();
-            router.push(`/app?id=${users[userIndex].id}`);
-          } else {
-            alert('Usuário inexistente! Por favor crie uma conta');
-          }
+          eventInfo.preventDefault();
+          handleUserID(eventInfo);
         }}
       >
         <InputLogin

@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import React from 'react';
 import { useRouter } from 'next/router';
 import { uuid } from 'uuidv4';
+import axios from 'axios';
 import Logo from '../src/components/Logo';
 import InputLogin from '../src/components/InputLogin';
 import LoginButton from '../src/components/LoginButton';
-import usersDB from '../users.json';
 
 const Information = styled.h2`
   margin-top: 0;
@@ -31,6 +31,23 @@ export default function Create() {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+  async function handleCreateUser(eventInfo) {
+    const id = uuid();
+    const response = await axios.post('/api/create', {
+      id,
+      name,
+      email,
+      password,
+      soaps: [],
+    });
+    if (response) {
+      eventInfo.preventDefault();
+      router.push(`/app?id=${id}`);
+    } else {
+      alert('Erro ao cadastrar usuário!');
+    }
+  }
   return (
     <>
       <Logo>Soap</Logo>
@@ -38,11 +55,8 @@ export default function Create() {
       <Information>Cadastre-se agora mesmo!</Information>
       <FormCreate
         onSubmit={eventInfo => {
-          const { users } = usersDB;
-          const id = uuid();
-          users.push({ id, name, email, password });
           eventInfo.preventDefault();
-          router.push(`/app?id=${id}`);
+          handleCreateUser(eventInfo);
         }}
       >
         <InputLogin
@@ -70,10 +84,10 @@ export default function Create() {
           disabled={
             name.length === 0 || email.length === 0 || password.length === 0
           }
-          onClick={eventInfo => {
-            eventInfo.preventDefault();
-            router.push('/');
-          }}
+          // onClick={eventInfo => {
+          //   eventInfo.preventDefault();
+          //   router.push('/app');
+          // }}
           onKeyPress={eventInfo => {
             if (eventInfo.which === 13 || eventInfo.keyCode === 13) {
               return false;

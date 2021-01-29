@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import React from 'react';
 import { uuid } from 'uuidv4';
-import usersDB from '../../../users.json';
 import BackgroundInformation from '../BackgroundInformation';
 import TituloInformation from '../TituloInformation';
 
@@ -62,14 +63,23 @@ const AlteraRegistro = styled.button`
 `;
 
 export default function RegistroSabonetes({ router, id }) {
-  let idSoap;
-  let date;
-  let quantity;
+  const [date, setDate] = React.useState('');
+  const [quantity, setQuantity] = React.useState(0);
 
-  const { users } = usersDB;
-  const userIndex = users.findIndex(user => user.id === id);
-  const user = users[userIndex];
-  const { soaps } = user;
+  async function handleRegister(event) {
+    event.preventDefault();
+    const response = await axios.post('/api/register', {
+      idSoap: uuid(),
+      idUser: id,
+      date,
+      quantity,
+    });
+    if (response) {
+      alert('Sabonete Cadastrado com Sucesso');
+    } else {
+      alert('Houve um erro no cadastro. Tente novamente!');
+    }
+  }
 
   return (
     <>
@@ -83,7 +93,7 @@ export default function RegistroSabonetes({ router, id }) {
                 placeholder="15/01/2021"
                 type="date"
                 onChange={eventInfo => {
-                  date = eventInfo.target.value.toString();
+                  setDate(eventInfo.target.value.toString());
                 }}
               />
             </div>
@@ -93,25 +103,14 @@ export default function RegistroSabonetes({ router, id }) {
                 placeholder="5"
                 type="number"
                 onChange={eventInfo => {
-                  quantity = parseInt(eventInfo.target.value, 10);
+                  setQuantity(parseInt(eventInfo.target.value, 10));
                 }}
               />
             </div>
             <button
               type="button"
               onClick={eventInfo => {
-                eventInfo.preventDefault();
-                idSoap = uuid();
-                const soap = { idSoap, date, quantity };
-                soaps.push(soap);
-                const soapIndex = soaps.findIndex(
-                  soapItem => soap.id === soapItem.id
-                );
-                if (soapIndex >= 0) {
-                  alert('Sabonete Cadastrado com Sucesso');
-                } else if (soapIndex < 0) {
-                  alert('Houve um erro no cadastro. Tente novamente!');
-                }
+                handleRegister(eventInfo);
               }}
               // disabled={date === undefined || quantity === undefined}
             >

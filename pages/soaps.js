@@ -1,23 +1,28 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import BackgroundApp from '../src/components/BackgroundApp';
-import usersDB from '../users.json';
 import SideBar from '../src/components/SideBar';
 import Sabonetes from '../src/components/Sabonetes';
 
 export default function Register() {
   const router = useRouter();
   const { id } = router.query;
+  const [name, setName] = React.useState('');
 
-  const { users } = usersDB;
-  const userIndex = users.findIndex(user => user.id === id);
-  const user = users[userIndex];
-  const { name } = user;
+  useEffect(() => {
+    axios.get('/api/users').then(response => {
+      const { users } = response.data;
+      const userIndex = users.findIndex(user => user.id === id);
+      const user = users[userIndex];
+      setName(user.name);
+    });
+  }, []);
 
   return (
     <>
       <BackgroundApp>
-        <SideBar name={name} router={router} id={id} index={userIndex} />
+        <SideBar router={router} id={id} name={name} />
         <Sabonetes id={id} />
       </BackgroundApp>
     </>

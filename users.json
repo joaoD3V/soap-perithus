@@ -6,11 +6,7 @@
       "email": "joao.devweb@gmail.com",
       "password": "123456",
       "soaps": [
-        {
-          "id": "1",
-          "date": "2021-01-01",
-          "quantity": 5
-        }
+
       ]
     }
   ]

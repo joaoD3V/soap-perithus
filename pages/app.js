@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import SideBar from '../src/components/SideBar';
 import BackgroundApp from '../src/components/BackgroundApp';
-import usersDB from '../users.json';
 
 export const DivLucroAtual = styled.div`
   width: 100%;
@@ -28,16 +29,21 @@ export const ResultadoLucroAtual = styled.div`
 export default function App() {
   const router = useRouter();
   const { id } = router.query;
+  const [name, setName] = React.useState({ name: '' });
 
-  const { users } = usersDB;
-  const userIndex = users.findIndex(user => user.id === id);
-  const user = users[userIndex];
-  const nameUser = user.name;
+  useEffect(() => {
+    axios.get('/api/users').then(response => {
+      const { users } = response.data;
+      const userIndex = users.findIndex(user => user.id === id);
+      const user = users[userIndex];
+      setName(user.name);
+    });
+  }, []);
 
   return (
     <>
       <BackgroundApp>
-        <SideBar name={nameUser} router={router} id={id} />
+        <SideBar router={router} id={id} name={name} />
       </BackgroundApp>
     </>
   );

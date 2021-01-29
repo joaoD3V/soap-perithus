@@ -62,7 +62,7 @@ export default function Sidebar({ id, router, name }) {
       <Aside>
         <LogoSidebar>Soap</LogoSidebar>
         <SemanaDiaMesAno>{diaAtual}</SemanaDiaMesAno>
-        <NomeApresentacao>{`Olá, ${name}!`}</NomeApresentacao>
+        <NomeApresentacao>{`Olá ${name}!`}</NomeApresentacao>
         <Menu
           type="button"
           onClick={eventInfo => {
@@ -103,6 +103,15 @@ export default function Sidebar({ id, router, name }) {
         <Information>1 lote = R$25,00</Information>
         <Information>1 unidade = R$5,00</Information>
         <Information>Salário Mínimo = R$ 1.100,00</Information>
+        <Menu
+          type="button"
+          onClick={eventInfo => {
+            eventInfo.preventDefault();
+            router.push(`/`);
+          }}
+        >
+          Sair
+        </Menu>
       </Aside>
     </>
   );
@@ -110,6 +119,6 @@ export default function Sidebar({ id, router, name }) {
 
 Sidebar.propTypes = {
   id: PropTypes.string.isRequired,
-  router: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
+  router: PropTypes.func.isRequired,
 };
