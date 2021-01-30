@@ -19,7 +19,7 @@ Sistema Web de gerenciamento financeiro para distribuidores de sabonetes, com a 
 
 ### Observação
 
-Tive um certa dificuldade com relação a persistência dos dados, pois não sei uma forma eficaz de integrar algum banco de dados com o backend. Devido a isso, eu optei por usar a tecnologia **Serveless Functions** da própria *Vercel* para que eu pudesse consumir uma **API** no frontend, que tem como base de dados dois arquivos **JSON**. Um contendo as informações dos usuários e outro contendo informações referentes as regras de negócio. Esses dois arquivos **JSON**, contém dados fictícios para fins de demonstração das funcionalidade implementadas.
+Tive uma certa dificuldade com relação a persistência dos dados, pois não sei uma forma eficaz de integrar algum banco de dados com o backend. Devido a isso, eu optei por usar a tecnologia **Serveless Functions** da própria *Vercel* para que eu pudesse consumir uma **API** no frontend, que tem como base de dados dois arquivos **JSON**. Um contendo as informações dos usuários e outro contendo informações referentes as regras de negócio. Esses dois arquivos **JSON**, contém dados fictícios para fins de demonstração das funcionalidade implementadas.
 
 As funcionalidades de **criação de usuário** e de **registro de sabonetes** não estão sendo persistidas.
 
