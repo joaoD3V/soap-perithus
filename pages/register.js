@@ -16,7 +16,6 @@ export default function Register() {
       const userIndex = users.findIndex(user => user.id === id);
       const user = users[userIndex];
       setName(user.name);
-      console.log(name);
     });
   }, []);
 

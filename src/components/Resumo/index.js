@@ -142,14 +142,17 @@ export default function Resumo({ id }) {
     setLotes(total);
 
     setImpostoMarca(
-      (total % 100) *
-        ((informations.precoPorLote * informations.impostoMarca) / 100)
+      (Math.floor((total * informations.compraPorLote) / 100) *
+        (informations.impostoMarca * 100)) /
+        100
     );
     setImpostoMei((informations.salarioMinimo * informations.impostoMei) / 100);
-    setDespesasImposto(impostoMarca + impostoMei);
+    setDespesasImposto(
+      parseFloat(impostoMarca, 10) + parseFloat(impostoMei, 10)
+    );
     setCompra(total * informations.compraPorLote);
     // eslint-disable-next-line prettier/prettier
-    setLucro((total * informations.precoPorLote - impostoMarca) - impostoMei);
+    setLucro((total * informations.vendaPorLote) - (despesasImposto + compra));
   }, soaps);
 
   return (
@@ -158,11 +161,11 @@ export default function Resumo({ id }) {
         <LucroMensal>
           <h1>Lucro Mensal</h1>
           <div>
-            <h1>{lucro}</h1>
+            <h1>{Number.isNaN(lucro) ? 0 : lucro}</h1>
           </div>
         </LucroMensal>
         <Vendas>
-          <h1>Total de Vendas</h1>
+          <h1>Total de Compra e Vendas</h1>
           <div>
             <h1>{lotes}</h1>
           </div>

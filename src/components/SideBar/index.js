@@ -98,27 +98,10 @@ export default function Sidebar({ id, router, name }) {
         >
           Registrar Sabonetes
         </Menu>
-        <Menu
-          type="button"
-          onClick={eventInfo => {
-            eventInfo.preventDefault();
-            router.push(`/consult?id=${id}`);
-          }}
-        >
-          Consultar por Mês e Ano
-        </Menu>
-        {/* <Menu
-          type="button"
-          onClick={eventInfo => {
-            eventInfo.preventDefault();
-            router.push(`/list?id=${id}`);
-          }}
-        >
-          Listar Valores
-        </Menu> */}
+
         <Information>{`Compra por lote = ${informations.compraPorLote} reais`}</Information>
+        <Information>{`Venda por lote = ${informations.vendaPorLote} reais`}</Information>
         <Information>{`1 lote = ${informations.quantidaPorLote} unidades`}</Information>
-        <Information>{`1 lote = ${informations.precoPorLote} reais`}</Information>
         <Information>{`1 unidade = ${informations.precoPorUnidade} reais`}</Information>
         <Information>{`Salário Mínimo = ${informations.salarioMinimo} reais`}</Information>
         <Menu
